@@ -1,7 +1,7 @@
 const baseURL = "http://localhost:8000";
 
 async function loadAnalytics() {
-  const res = await fetch(`${baseURL}/analytics`);
+  const res = await fetch(`${baseURL}/analytics/`);
   const data = await res.json();
   
   document.getElementById("itemCount").textContent = data.stats.item_count;

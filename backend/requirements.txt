@@ -4,4 +4,5 @@ motor
 pydantic
 numpy
 matplotlib
-python-multipart # Needed for form data potentially, good practice for FastAPI
+python-multipart # Needed for form data potentially, good practice for FastAPI
+bson
