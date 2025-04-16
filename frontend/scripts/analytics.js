@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const baseURL = "http://localhost:8001";
-=======
 const baseURL = "http://localhost:8000";
->>>>>>> d78737ca44aebbb43c528f6425ce1b3c85a49559
 
 async function loadAnalytics() {
   const res = await fetch(`${baseURL}/analytics`);
