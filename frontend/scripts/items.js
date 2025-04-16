@@ -24,11 +24,7 @@ async function loadItems(searchTerm = "") {
 }
 
 async function deleteItem(id) {
-<<<<<<< HEAD
-  await fetch(`${baseURL}/items/${id}`, { method: "POST" });
-=======
   await fetch(`${baseURL}/items/${id}`, { method: "DELETE" });
->>>>>>> d78737ca44aebbb43c528f6425ce1b3c85a49559
   loadItems(document.getElementById("search").value); 
 }
 
@@ -42,11 +38,7 @@ document.getElementById("itemForm").addEventListener("submit", async (e) => {
   const description = document.getElementById("description").value;
   await fetch(`${baseURL}/items`, {
     method: "POST",
-<<<<<<< HEAD
-    headers: { "Content-Type": "application/html" },
-=======
     headers: { "Content-Type": "application/json" },
->>>>>>> d78737ca44aebbb43c528f6425ce1b3c85a49559
     body: JSON.stringify({ name, description })
   });
   e.target.reset();
