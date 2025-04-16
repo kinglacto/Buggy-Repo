@@ -1,20 +1,21 @@
-
 async function loadUsers() {
   const res = await fetch(`/users`);
   const users = await res.json();
   const list = document.getElementById("userList");
   list.innerHTML = "";
-  
-  document.getElementById("userCount").textContent = `Total users: ${users.length}`;
+
+  document.getElementById(
+    "userCount"
+  ).textContent = `Total users: ${users.length}`;
   // why did I give such a weird task
-  users.forEach(user => {
+  users.forEach((user) => {
     const li = document.createElement("li");
     li.textContent = `${user.username}: ${user.bio}`;
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.onclick = async () => {
-      await fetch(`${baseURL}/users/${user._id}`, { method: "DELETE" });
+      await fetch(`/users/${user._id}`, { method: "DELETE" });
       loadUsers();
     };
 
@@ -25,22 +26,26 @@ async function loadUsers() {
 
 document.getElementById("search").addEventListener("input", async (e) => {
   const term = e.target.value.toLowerCase();
-  const res = await fetch(`${baseURL}/users`);
+  const res = await fetch(`/users`);
   const users = await res.json();
   const list = document.getElementById("userList");
   list.innerHTML = "";
 
-  const filteredUsers = users.filter(user => user.username.toLowerCase().includes(term));
-  document.getElementById("userCount").textContent = `Total users: ${filteredUsers.length}`;
+  const filteredUsers = users.filter((user) =>
+    user.username.toLowerCase().includes(term)
+  );
+  document.getElementById(
+    "userCount"
+  ).textContent = `Total users: ${filteredUsers.length}`;
 
-  filteredUsers.forEach(user => {
+  filteredUsers.forEach((user) => {
     const li = document.createElement("li");
     li.textContent = `${user.username}: ${user.bio}`;
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.onclick = async () => {
-      await fetch(`/users/${user._id}`, { method: "PATCH" });
+      await fetch(`/users/${user._id}`, { method: "DELETE" });
       loadUsers();
     };
 
@@ -58,7 +63,7 @@ document.getElementById("userForm").addEventListener("submit", async (e) => {
   await fetch(`/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, bio })
+    body: JSON.stringify({ username, bio }),
   });
   e.target.reset();
   loadUsers();
