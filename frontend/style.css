@@ -1,2 +1,372 @@
-Aah I was too lazy to implement this
-You can do it
+/* --- General Resets & Body Styling --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f7f6;
+  padding-top: 70px; /* Add padding to prevent content from hiding behind fixed nav */
+}
+
+/* --- Navigation Bar --- */
+nav {
+  background-color: #2c3e50; /* Dark blue-grey */
+  color: #ecf0f1; /* Light grey text */
+  padding: 1rem 2rem;
+  position: fixed; /* Keep nav at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure nav stays on top */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 1.5rem; /* Space between nav links */
+  align-items: center;
+}
+
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent; /* For hover effect */
+}
+
+nav a:hover,
+nav a.active /* Add 'active' class via JS if needed for current page */ {
+  color: #3498db; /* Bright blue for hover/active */
+  border-bottom-color: #3498db;
+}
+
+/* --- Main Content Container --- */
+.container {
+  max-width: 960px;
+  margin: 2rem auto; /* Center the container with space top/bottom */
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Typography --- */
+h1 {
+  color: #2c3e50; /* Dark blue-grey */
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  color: #34495e; /* Slightly lighter blue-grey */
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Forms & Inputs --- */
+form {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background-color: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+input[type="text"],
+input[type="email"], /* Add other input types as needed */
+select,
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+button,
+input[type="submit"] {
+  display: inline-block;
+  background-color: #3498db; /* Primary blue */
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #2980b9; /* Darker blue */
+}
+
+button:active,
+input[type="submit"]:active {
+  transform: scale(0.98); /* Slight press effect */
+}
+
+button.delete-btn, /* Specific styling for delete buttons */
+li button { /* Target buttons inside list items */
+  background-color: #e74c3c; /* Red for delete */
+  margin-left: 1rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+button.delete-btn:hover,
+li button:hover {
+  background-color: #c0392b; /* Darker red */
+}
+
+/* --- Lists (Items, Users) --- */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Specific Page Styles --- */
+
+/* Analytics */
+#stats p {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+#stats span {
+  font-weight: bold;
+  color: #2c3e50;
+}
+#plot {
+  margin-top: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+/* News */
+.news-scrollable,
+.attempt-scrollable { /* Shared style for scrollable divs */
+  max-height: 400px; /* Adjust height as needed */
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+}
+
+.news-item {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+.news-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.news-item h3 a {
+  color: #34495e;
+}
+.news-item h3 a:hover {
+  color: #3498db;
+  text-decoration: none;
+}
+.news-item p {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+#loading {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  color: #777;
+}
+
+/* Profile */
+#userCounts, #itemCount, #articleCount, #attemptCount { /* Shared style for counts */
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+/* Quiz */
+#scoreDisplay {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #2c3e50;
+}
+#question {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #eaf2f8; /* Light blue background */
+  border-radius: 4px;
+  border-left: 5px solid #3498db;
+}
+#answerForm label {
+  display: block;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+#answerForm label:hover {
+  background-color: #f0f0f0;
+}
+#answerForm input[type="radio"] {
+  margin-right: 0.5rem;
+}
+#answerForm button {
+  margin-top: 1rem;
+}
+#feedback {
+  margin-top: 1rem;
+  font-weight: bold;
+  padding: 0.8rem;
+  border-radius: 4px;
+  text-align: center;
+}
+#feedback:empty { /* Hide feedback if empty */
+    padding: 0;
+}
+#feedback:not(:empty) { /* Add styles only when feedback exists */
+    margin-bottom: 1rem;
+}
+#feedback:not(:empty)::before { /* Add icons based on content - simple example */
+    content: "ℹ️ "; /* Default info icon */
+}
+#feedback:not(:empty):containing("✅") { /* Needs JS to add class or check content */
+    background-color: #d4edda; /* Green for success */
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+#feedback:not(:empty):containing("❌") { /* Needs JS to add class or check content */
+    background-color: #f8d7da; /* Red for error */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+#resetBtn {
+  background-color: #f39c12; /* Orange for reset */
+  margin-top: 1rem;
+  display: block; /* Make it full width or adjust as needed */
+  width: 100%;
+}
+#resetBtn:hover {
+  background-color: #e67e22; /* Darker orange */
+}
+.attempt-scrollable div {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 0.9rem;
+}
+.attempt-scrollable div:last-child {
+  border-bottom: none;
+}
+
+/* --- Utility Classes --- */
+.hidden {
+  display: none !important; /* Force hide */
+}
+
+/* --- Basic Responsiveness --- */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.8rem 1rem;
+    gap: 1rem;
+  }
+  nav a {
+    font-size: 0.9rem;
+  }
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  button, input[type="submit"] {
+    width: 100%; /* Make buttons full width on smaller screens */
+    margin-bottom: 0.5rem;
+  }
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  li button {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: auto; /* Revert button width inside list items */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 60px; /* Adjust for potentially smaller nav */
+  }
+  nav {
+    flex-direction: column; /* Stack nav items vertically if needed */
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+  }
+  nav a {
+    padding: 0.3rem 0;
+  }
+  .container {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  input[type="text"], select, textarea, button, input[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
+}

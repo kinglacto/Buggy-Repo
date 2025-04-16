@@ -21,16 +21,20 @@ function updateScoreDisplay() {
 
 function updateAttempts() {
   const search = searchInput.value.toLowerCase();
-  const filtered = attemptHistory.filter(a =>
+  const filtered = attemptHistory.filter((a) =>
     a.question.toLowerCase().includes(search)
   );
 
-  attemptList.innerHTML = filtered.map(a => `
+  attemptList.innerHTML = filtered
+    .map(
+      (a) => `
     <div>
       <strong>${a.question}</strong><br/>
       Your answer: ${a.answer} — ${a.result}
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 
   attemptCount.textContent = `Total attempts: ${filtered.length}`;
 }
@@ -58,12 +62,17 @@ async function loadQuestion() {
 
     questionDiv.textContent = data.text;
 
-    form.innerHTML = data.options.map(option => `
+    form.innerHTML =
+      data.options
+        .map(
+          (option) => `
       <label>
         <input type="radio" name="answer" value="${option}" required>
         ${option}
       </label><br/>
-    `).join("") + `<button type="submit">Submit</button>`;
+    `
+        )
+        .join("") + `<button type="submit">Submit</button>`;
 
     form.dataset.id = data.id;
     feedback.textContent = "";
@@ -84,9 +93,9 @@ form.addEventListener("submit", async (e) => {
 
   try {
     const res = await fetch(`${BASE_URL}/quiz/answer`, {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, answer, score })
+      body: JSON.stringify({ id, answer, score }),
     });
 
     const data = await res.json();
@@ -99,7 +108,9 @@ form.addEventListener("submit", async (e) => {
     attemptHistory.push({
       question: currentQuestion.text,
       answer,
-      result: data.is_correct ? "✅ Correct" : `❌ Wrong (Correct: ${data.correct_answer})`
+      result: data.is_correct
+        ? "✅ Correct"
+        : `❌ Wrong (Correct: ${data.correct_answer})`,
     });
 
     updateAttempts();
